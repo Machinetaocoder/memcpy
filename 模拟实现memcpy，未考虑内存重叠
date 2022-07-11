@@ -1,0 +1,45 @@
+#include<stdio.h>
+#include "assert.h"
+#include "stdlib.h"
+//库中memcpy的实现
+//struct 
+//{
+//	char name[40];
+//	int age;
+//}person,person_copy;
+//int main()
+//{
+//	char myname[] = "Pierre de Fermat";
+//	//use memcpy to copy string
+//	memcpy(person.name, myname, strlen(myname) + 1);
+//	person.age = 46;
+//	//use memcopy to copy structure
+//	memcpy(&person_copy, &person, sizeof(person));
+//	printf("person_copy:%s,%d\n",person_copy.name,person_copy.age);
+//	system("pause");
+//	return 0;
+//}
+
+//模拟实现mymemcpy函数，未考虑内存重叠
+void* Mymemcpy(void* dest, void* src, size_t num)
+{
+	assert(dest);
+	assert(src);
+	void* p = dest;
+	while (num--)
+	{
+		*(char*)dest = *(char*)src;
+		dest = (char*)dest + 1;
+		src = (char*)src + 1;
+	}
+	return p;
+}
+int main()
+{
+	char dest[56];
+	char src[] = "xxxtentacion  ts lil peep";
+	printf("%s\n", Mymemcpy(dest, src, strlen(src) + 1));
+	system("pause");
+	return 0;
+}
+
